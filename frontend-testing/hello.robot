@@ -14,6 +14,11 @@ Hello with UI Test
     Try to open in browser   ${URL}  chrome
     Check hello message
 
+
+Hello with UI Test 02
+    Try to open in browser   ${URL}  chrome
+    Check hello message
+
 *** Keywords ***
 Check hello message
     Wait Until Element Contains  xpath://*[@id="root"]/div/button[1]   Add New merchant...
