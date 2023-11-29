@@ -21,7 +21,7 @@ Hello with UI Test 02
 
 *** Keywords ***
 Check hello message
-    Wait Until Element Contains  xpath://*[@id="root"]/div/button[1]   Add New merchant...
+    Wait Until Element Contains  xpath://*[@id="root"]/div/button[1]   Hey
     Wait Until Element Contains  xpath://*[@id="root"]/div/button[2]   Delete merchant
     Wait Until Element Contains  xpath://*[@id="root"]/div/button[3]   Update merchant
 
