@@ -15,7 +15,9 @@ services:
       timeout: 5s
       retries: 10
       start_period: 5s
-    
+    depends_on:
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:16.0
