@@ -1,15 +1,9 @@
 version: "3"
 services:
-  frontend:
-    image: ${FRONTEND_IMAGE:-somkiat/frontend:1.0}
-    ports:
-      - "${FRONTEND_PORT:-8888}:80"
-    depends_on:
-      backend:
-        condition: service_healthy
-  
   backend:
     image: ${BACKEND_IMAGE:-somkiat/backend:1.0}
+    ports:
+      - "${BACKEND_PORT:-3000}:3000"
     environment:
       DB_HOST: db
       DB_NAME: postgres
@@ -19,11 +13,9 @@ services:
       test: wget --no-verbose --tries=1 --spider http://localhost:3000 || exit 1
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
       start_period: 5s
-    depends_on:
-      db:
-        condition: service_healthy
+    
 
   db:
     image: postgres:16.0
@@ -40,16 +32,3 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
-
-  backend_test:
-    build: ./backend-testing
-    tty: true
-    volumes:
-      - ./backend-test-report:/etc/newman/newman
-  
-  frontend_test:
-    build: ./frontend-testing
-    volumes:
-      - ./frontend-test-report:/app/report
-    environment:
-      - FRONTEND_URL=${FRONTEND_URL:-https://www.google.com}
